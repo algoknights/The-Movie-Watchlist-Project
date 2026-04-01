@@ -1,4 +1,4 @@
-const API_KEY = 7015cea ;
+const API_KEY = "7015cea" ;
 
 const searchInput = document.getElementById("searchInput");
 const moviesContainer = document.getElementById("moviesContainer");
