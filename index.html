@@ -2,20 +2,108 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Movie Watchlist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover and save your favorite movies with advanced filtering and beautiful design.">
+  <title>Movie Watchlist | Premium Edition</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>🎬 Movie Watchlist</h1>
+  <header class="app-header">
+    <div class="header-content">
+      <h1>🎬 Movie Watchlist</h1>
+      <button id="themeToggle" class="btn btn-icon" type="button" aria-label="Toggle theme">
+        <span class="icon-dark">🌙</span>
+        <span class="icon-light">☀️</span>
+      </button>
+    </div>
+  </header>
 
-  <input type="text" id="searchInput" placeholder="Search movies..." />
+  <section class="controls-section">
+    <div class="controls glass-panel">
+      <div class="search-wrap">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="searchInput" placeholder="Search for movies, series..." autocomplete="off" />
+      </div>
 
-  <div id="loader" class="hidden">Loading...</div>
+      <div class="filters-row">
+        <select id="typeFilter" aria-label="Filter by type" class="styled-select">
+          <option value="all">All Types</option>
+          <option value="movie">Movies</option>
+          <option value="series">Series</option>
+        </select>
 
-  <div id="emptyState" class="hidden">No movies found</div>
+        <select id="genreFilter" aria-label="Filter by genre" class="styled-select">
+           <option value="all">Any Genre</option>
+           <option value="Action">Action</option>
+           <option value="Comedy">Comedy</option>
+           <option value="Drama">Drama</option>
+           <option value="Sci-Fi">Sci-Fi</option>
+           <option value="Horror">Horror</option>
+           <option value="Romance">Romance</option>
+           <option value="Thriller">Thriller</option>
+           <option value="Animation">Animation</option>
+        </select>
+        
+        <select id="ratingFilter" aria-label="Filter by rating" class="styled-select">
+          <option value="all">Any Rating</option>
+          <option value="8">8.0+ (Great)</option>
+          <option value="7">7.0+ (Good)</option>
+          <option value="6">6.0+ (Okay)</option>
+        </select>
 
-  <div id="moviesContainer"></div>
+        <select id="yearFilter" aria-label="Filter by year" class="styled-select">
+          <option value="all">Any Year</option>
+          <option value="2020s">2020s</option>
+          <option value="2010s">2010s</option>
+          <option value="2000s">2000s</option>
+          <option value="older">1999 &amp; Older</option>
+        </select>
+
+        <select id="sortBy" aria-label="Sort results" class="styled-select">
+          <option value="relevance">Sort: Relevance</option>
+          <option value="title-asc">Title (A &rarr; Z)</option>
+          <option value="title-desc">Title (Z &rarr; A)</option>
+          <option value="rating-desc">Rating (High &rarr; Low)</option>
+          <option value="year-desc">Year (New &rarr; Old)</option>
+          <option value="year-asc">Year (Old &rarr; New)</option>
+        </select>
+
+        <label class="toggle-checkbox">
+          <input type="checkbox" id="favoritesOnly" />
+          <span class="toggle-indicator"></span>
+          <span class="label-text">Favorites</span>
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div id="moviesContainer" class="movies-grid"></div>
+
+    <!-- Initial Data Loader (Skeletons) -->
+    <div id="loader" class="hidden">
+      <div class="movies-grid">
+        <div class="skeleton-card"><div class="skeleton-poster"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+        <div class="skeleton-card"><div class="skeleton-poster"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+        <div class="skeleton-card"><div class="skeleton-poster"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+        <div class="skeleton-card"><div class="skeleton-poster"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+        <div class="skeleton-card"><div class="skeleton-poster"></div><div class="skeleton-text"></div><div class="skeleton-text short"></div></div>
+      </div>
+    </div>
+
+    <!-- Infinite Scroll Spinner -->
+    <div id="infiniteScrollSpinner" class="spinner-container hidden">
+      <div class="spinner"></div>
+      <span>Loading more...</span>
+    </div>
+
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon">🍿</div>
+      <h2>No matches found</h2>
+      <p>Try adjusting your search criteria or filters to find what you're looking for.</p>
+    </div>
+  </main>
 
   <script src="script.js"></script>
 </body>
